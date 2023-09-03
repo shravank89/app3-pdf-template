@@ -14,10 +14,13 @@ for index, row in df.iterrows():
     pdf.set_text_color(200, 100, 50)
     pdf.set_font(family="Courier", style="B", size=24)
     pdf.cell(w=0, h=12, txt=row["Topic"], align="L", ln=1)
-    pdf.line(11, 21, 201, 21)
+
+    # Added lines into pdf main page
+    for x in range(21,297,12):
+        pdf.line(11, x, 201, x)
 
     # Set footers for main page
-    pdf.ln(260)
+    pdf.ln(265)
     pdf.set_font(family="Courier", style="I", size=8)
     pdf.set_text_color(100, 200, 50)
     pdf.cell(w=0, h=10, txt=row["Topic"], align="R", ln=1)
@@ -25,7 +28,10 @@ for index, row in df.iterrows():
     # Set footers for extra page
     for x in range(row["Pages"] - 1):
         pdf.add_page()
-        pdf.ln(270)
+        # Added lines into pdf extra page
+        for x in range(21, 297, 12):
+            pdf.line(11, x, 201, x)
+        pdf.ln(275)
         pdf.set_font(family="Courier", style="I", size=8)
         pdf.cell(w=0, h=10, txt=row["Topic"], align="R", ln=1)
 
